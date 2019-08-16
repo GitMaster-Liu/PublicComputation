@@ -1,0 +1,311 @@
+<div class="animated fadeIn">
+	<br />
+	<form class="layui-form" action=""
+		style="display: flex; justify-content: flex-start">
+		<div id="lesson" class="layui-form" style="width: 280px" lay-filter="test">
+			<select id="LessonId">
+				<!-- 此处调用一部分vue代码 -->
+				<option v-for="option in options" v-bind:value="option.id">{{option.name }}-{{option.lessontime}}</option>
+			</select>
+		</div>
+		<div style="width: 50px"></div>
+		<div>
+			<button type="button" id="query" class="layui-btn">课程查询</button>
+
+			<button type="button" id="download" class="layui-btn">学生列表下载</button>
+			<button type="button" id="download2" class="layui-btn">学生知识点数据下载</button>
+		</div>
+	</form>
+	
+		<!-- 学生列表 -->
+		<table class="layui-table" id="hostname" lay-filter="hostname"></table>
+</div>
+<div id="lessonmemberlist"></div>
+<div class="layui-row" id="downloadLesson" style="display: none;">
+	<table class="layui-hide" id="lessonlist" lay-filter="Lessonlist"></table>
+</div>
+
+<script>
+	layui.use(['form','table'], function() {//页面加载时
+		var $=layui.jquery,form=layui.form,table=layui.table; 
+		if (sessionStorage.getItem('lessonId') != null) {
+			var lessonId = sessionStorage.getItem('lessonId');
+			//$("#LessonId").val(lessonId);
+			 
+		} else {
+			var lessonId = $("#LessonId").val();
+			window.sessionStorage.setItem("lessonId", lessonId);
+		}
+		
+		table.render({
+			elem : '#hostname',
+			url : location.origin + '/lessonMember/' + lessonId,
+			page:true,
+			limit:10,
+			limits:[10,15,20,30,40],
+			cols : [ [ {
+				field : 'studentName',
+				width : '10%',
+				title : '学生姓名',
+				align : 'center'
+			}, {
+				field : 'school',
+				width : '10%',
+				title : '学校',
+				align : 'center'
+			}, {
+				field : 'institute',
+				width : '12%',
+				title : '学院',
+				align : 'center'
+			}, {
+				field : 'major',
+				width : '13%',
+				title : '专业',
+				align : 'center'
+			}, {
+				field : 'className',
+				title : '班级',
+				width : '10%',
+				align : 'center',
+				minWidth : 100
+			}, {
+				field : 'number',
+				width : '10%',
+				title : '学号',
+				align : 'center'
+			}, {
+				field : 'questionCount',
+				width : '9%',
+				title : '答题数',
+				align : 'center'
+			}, {
+				field : 'correctCount',
+				width : '9%',
+				title : '准确数',
+				align : 'center'
+			}, {
+				field : 'accuracy',
+				width : '9%',
+				title : '正确率(%)',
+				align : 'center'
+			}, {
+				field : 'center',
+				width : '8%',
+				title : '操作',
+				align : 'center',
+				toolbar : '#barDemo'
+			} ] ]
+		});
+		layui.form.render();
+		layui.form.render('select','test');
+		
+		table.on('tool(lessonmember)', function(obj) { //注：tool是工具条事件名，lessonmember是table原始容器的属性 lay-filter="对应的值"
+			var data = obj.data; //获得当前行数据
+			var memberId = data['memberId']; //获取属性memberId的值, memberId是后台传过来的，只是在前端未显示
+			window.sessionStorage.setItem("memberId", memberId);
+		});
+		
+	});
+</script>
+
+<script>
+	$('#query').on('click', function() {//点击查询按钮
+		layui.use('table', function() {
+			var table = layui.table;
+			var lessonId = $("#LessonId").val();
+			window.sessionStorage.setItem("lessonId", lessonId);
+			table.render({
+				elem : '#lessonmember',
+				url : location.origin + '/lessonMember/' + lessonId,
+				page:true,
+				limit:10,
+				limits:[10,15,20,30,40],
+				cols : [ [ {
+					field : 'studentName',
+					width : '10%',
+					title : '学生姓名',
+					align : 'center'
+				}, {
+					field : 'school',
+					width : '10%',
+					title : '学校',
+					align : 'center'
+				}, {
+					field : 'institute',
+					width : '12%',
+					title : '学院',
+					align : 'center'
+				}, {
+					field : 'major',
+					width : '13%',
+					title : '专业',
+					align : 'center'
+				}, {
+					field : 'className',
+					title : '班级',
+					width : '10%',
+					align : 'center',
+					minWidth : 100
+				}, {
+					field : 'number',
+					width : '10%',
+					title : '学号',
+					align : 'center'
+				}, {
+					field : 'questionCount',
+					width : '9%',
+					title : '答题数',
+					align : 'center'
+				}, {
+					field : 'correctCount',
+					width : '9%',
+					title : '准确数',
+					align : 'center'
+				}, {
+					field : 'accuracy',
+					width : '9%',
+					title : '正确率(%)',
+					align : 'center'
+				}, {
+					field : 'center',
+					width : '8%',
+					title : '操作',
+					align : 'center',
+					toolbar : '#barDemo'
+				} ] ]
+			});
+			table.on('tool(lessonmember)', function(obj) { //注：tool是工具条事件名，lessonmember是table原始容器的属性 lay-filter="对应的值"
+				var data = obj.data; //获得当前行数据
+				var memberId = data['memberId']; //获取属性memberId的值, memberId是后台传过来的，只是在前端未显示
+				window.sessionStorage.setItem("memberId", memberId);
+			});
+		});
+	});
+</script>
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" href="/lessonMember/knowledge">查看</a>
+</script>
+<!-- 显示下载课程列表 -->
+<script type="text/javascript">
+	layui.use('table', function() {//学生列表下载
+		var form = layui.form;
+		var table = layui.table;
+		$('#download').on('click', function() {
+			layer.open({
+				type:1,
+				title : '下载学生列表数据',
+				content : $("#downloadLesson"), 
+				area : [ '400px', '600px' ],
+				btn : [ '确定', '取消' ],
+				yes : function(index, layero) {
+				 	var checkStatus = layui.table.checkStatus('lessonlist');
+				 	data=checkStatus.data;
+				 	
+					var str = JSON.stringify(data);
+				 	var xqo = eval( str );
+				 	var lessonId="";
+			 		var lessonName="";
+				 	for(var i in xqo){
+				 		lessonId=lessonId+"!"+xqo[i].id;
+				 		lessonName=lessonName+"!"+xqo[i].name;
+				 	};
+				 	window.location.href=location.origin + '/lessonMember/downloadLessonStatistic/' + lessonId + '/'+ lessonName; 
+				 	layer.close(index);
+				} 
+			});
+			
+			form.render();
+		});
+		layui.use('table', function() {//学生知识点列表下载
+			var form = layui.form;
+			var table = layui.table;
+			$('#download2').on('click', function() {
+				layer.open({
+					type:1,
+					title : '下载学生知识点数据',
+					content : $("#downloadLesson"), 
+					area : [ '400px', '600px' ],
+					btn : [ '确定', '取消' ],
+					yes : function(index, layero) {
+						 var checkStatus = layui.table.checkStatus('lessonlist');
+						 data=checkStatus.data;
+						 	
+						 var str = JSON.stringify(data);
+						 var xqo = eval( str );
+						 var lessonId="";
+					 	 var lessonName="";
+						 for(var i in xqo){
+						 	lessonId=lessonId+"!"+xqo[i].id;
+						 	lessonName=lessonName+"!"+xqo[i].name;
+						 };
+						 window.location.href=location.origin + '/lessonMember/downloadKnowledgeStatistic/' + lessonId + '/'+ lessonName; 
+						 layer.close(index);
+					} 
+				});
+					
+				form.render();
+			});
+		});
+	});
+	
+</script>
+<!-- select中的课程 -->
+<script>
+	layui.use('form', function() {
+		var modalVm = new Vue({
+			el : '#lesson',
+			data : {
+				option : {},
+				options : []
+			},
+			created : function() {
+				this.send();
+			},
+			updated : function() {
+				layui.form.render('select');
+			},
+			methods : {
+				send : function() {
+					var me = this;
+					$.get(location.origin + '/lesson/getLesson', {
+
+					}, function(res) {
+						me.options = res;
+					});
+				}
+			},
+		});
+	});
+</script>
+<!-- 显示弹窗中的课程名称 -->
+<script>
+	layui.use('table', function() {
+		var table = layui.table;
+		table.render({
+			elem : '#lessonlist',
+			url : location.origin + '/lesson/getDownloadLesson',
+			cols : [ [ {
+				type : 'checkbox'
+			}, {
+				field : 'name',
+				width : 280,
+				title : '课程'
+			} ] ]
+		});
+	});
+</script>
+
+<!-- <script>
+layui.use('laypage', function(){
+  var laypage = layui.laypage;
+  
+  //执行一个laypage实例
+  laypage.render({
+    elem: 'lessonmemberlist' //注意，这里的 test1 是 ID，不用加 # 号
+    ,count: count
+    ,limit:10
+    ,limits:[10,20,30]//数据总数，从服务端得到
+  });
+});
+</script> -->

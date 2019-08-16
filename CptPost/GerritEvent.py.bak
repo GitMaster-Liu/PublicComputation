@@ -1,0 +1,44 @@
+#import configparser
+import Queue
+import json
+#import logging
+import threading
+import time
+import paramiko
+
+queue = Queue.Queue()
+i = 1
+class GerritStream(threading.Thread):
+    """Listens for gerrit event and put them in a quene"""
+
+    def run(self):
+        while 1:
+            client = paramiko.SSHClient()
+            key = paramiko.AutoAddPolicy()
+            client.set_missing_host_key_policy(key)
+            print(i)
+
+            try:
+                client.connect('192.168.7.6', 29418, 'liuyangyi', 'S5p360', timeout=5)
+
+                client.get_transport().set_keepalive(60)
+                _, stdout, _ = client.exec_command('gerrit stream-events')
+                for line in stdout:
+                    queue.put(json.loads(line))
+                    print(json.dumps(line))
+            except:
+                exit()
+            finally:
+                client.close()
+            time.sleep(5)
+
+gerrit = GerritStream()
+gerrit.daemon = True
+gerrit.start()
+
+while 1:
+    event = queue.get()
+    print(event)
+    print(1)
+
+gerrit.join()

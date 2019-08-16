@@ -1,0 +1,81 @@
+<div>
+	<br />
+	<form class="layui-form" action=""
+		style="display: flex; justify-content: flex-start">
+		<div>
+			<a href="/lessonMember/lessonmember" class="layui-btn" target="_self">返回上一页</a>
+		</div>
+	</form>
+	<table class="layui-table" id="knowledge"></table>
+</div>
+<div class="layui-row" id="downloadLesson" style="display: none;">
+	<table class="layui-hide" id="lessonlist" lay-filter="Lessonlist"></table>
+</div>
+<script>
+	layui.use('table', function() {
+		var table = layui.table;
+		var lessonId = sessionStorage.getItem('lessonId');
+		var memberId = sessionStorage.getItem('memberId');
+		var test = table.render({
+			elem : '#knowledge',
+			url : location.origin + '/lessonMember/' + lessonId + '/'
+					+ memberId,
+			cols : [ [ {
+				field : 'knowledge',
+				width : '20%',
+				title : '知识点',
+				align : 'center'
+			}, {
+				field : 'createTime',
+				width : '16%',
+				title : '创建时间',
+				align : 'center'
+			}, {
+				field : 'questionCount',
+				width : '16%',
+				title : '应答题数',
+				align : 'center'
+			}, {
+				field : 'answerCount',
+				width : '16%',
+				title : '已答题数',
+				align : 'center'
+			}, {
+				field : 'correctCount',
+				title : '正确数',
+				width : '16%',
+				align : 'center',
+			}, {
+				field : 'accuracy',
+				width : '16%',
+				title : '正确率(%)',
+				align : 'center'
+			} ] ]
+		});
+
+	});
+</script>
+
+<script>
+
+	$('#back').on('click', function() {
+		window.history.back();
+		location.reload();
+	});
+	
+	<!-- 显示弹窗中的课程名称 -->
+		layui.use('table', function() {
+			var table = layui.table;
+			table.render({
+				elem : '#lessonlist',
+				url : location.origin + '/lesson/getDownloadLesson',
+				cols : [ [ {
+					type : 'checkbox'
+				}, {
+					field : 'name',
+					width : 280,
+					title : '课程'
+				} ] ]
+			});
+		});
+</script>

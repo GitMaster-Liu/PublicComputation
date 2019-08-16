@@ -1,0 +1,68 @@
+<!--templates-->
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header" th:inline="text">
+                    <i class="fa fa-align-justify"></i>自动部署
+                </div>
+                <div class="card-body">
+                    <div class=" form-horizontal">
+
+					<a href="/system/autodeploy" class="layui-btn" target="_self" style="margin-left: 40px;">返回</a>                                             
+                        <form  id="moduleform" class="layui-form">
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> 主机名称： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入主机名称" class="layui-input"></input>
+                                </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> IP地址： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入IP地址" class="layui-input"></input>
+                                </div>
+                                </div>
+                          <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> Slave1类型： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入Slave1类型" class="layui-input"></input>
+                                </div>
+                                </div>
+                              
+                            <div class="layui-form-item row">
+                            <label class="layui-form-label" style="margin-left: 30px;"> Slave2类型： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入Slave2类型" class="layui-input"></input>
+                                </div>
+                               </div>
+                                <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> Slave3类型： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入Slave3类型" class="layui-input"></input>
+                                </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> 备注： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入备注" class="layui-input"></input>
+                                </div>
+                                </div>
+                            <div class="layui-form-item" >
+                                <div class="layui-input-block" style="margin-left:40px">
+                                    <button type="reset" class="layui-btn" lay-submit=""  id="save" lay-filter="save" onclick="compileFunction()">确定</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                            
+                            
+
+                            
+                      	</form>
+                    </div>
+                  </div>
+             </div>
+        </div>
+    </div>
+</div>
+ 

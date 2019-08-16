@@ -1,0 +1,108 @@
+<!--templates-->
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header" th:inline="text">
+                    <i class="fa fa-align-justify"></i>代码编译
+                </div>
+                <div class="card-body">
+                    <div class=" form-horizontal">
+
+
+                                              <div class="layui-form-item row" style="margin-left: 40px;">
+                        <a class="opreate-btn layui-btn layui-btn-sm" href="#" data-type="add" id="addbtn" onclick="addFunction()"><i class="icon-plus"></i>点击新增代码</a>
+                         <a class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  href="#" data-type="delete" id="deletebtn" onclick="delFunction()"><i class="icon-close"></i>点击删除代码</a>
+                            </div>
+                        <form  id="moduleform" class="layui-form">
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> 用户： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input"></input>
+                                </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> 工程： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入工程名" class="layui-input"></input>
+                                </div>
+                                </div>
+                          <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> 类型： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入工程类型，matlab或 python" class="layui-input"></input>
+                                </div>
+                                </div>
+                              
+                            <div class="layui-form-item row">
+                            <label class="layui-form-label" style="margin-left: 30px;"> 入口： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入代码入口名，python代码应包含.py尾缀" class="layui-input"></input>
+                                </div>
+                               </div>
+                                <div class="layui-form-item row">
+                                <label class="layui-form-label" style="margin-left: 30px;"> 邮箱： </label>
+                                <div class="layui-input-block col-md-6" style="margin-left: 0px;">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入邮箱地址" class="layui-input"></input>
+                                </div>
+                                </div>
+                            <div class="layui-form-item" >
+                                <div class="layui-input-block" style="margin-left:40px">
+                                    <button type="reset" class="layui-btn" lay-submit=""  id="save" lay-filter="save" onclick="compileFunction()">开始编译</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                            
+                            
+                      	</form>
+                      <div class="img">
+   <img src="/img/cims-logo.png" />
+   <vue-core-image-upload 
+   :class="['pure-button','pure-button-primary','js-btn-crop']"
+                        :crop="false"
+                        text="上传图片" 
+                        inputOfFile="file"  //输出文件的名称
+                        url="http://localhost:8080/uploadimg" //服务器api
+                        extensions="png,gif,jpeg,jpg"
+                        @imageuploaded="imageuploaded"   //图片上传成功后调用此方法
+                        @errorhandle="handleError"></vue-core-image-upload>
+</div>
+
+                    </div>
+                  </div>
+             </div>
+        </div>
+    </div>
+</div>
+<script>
+    import VueCoreImageUpload from 'vue-core-image-upload'
+
+    export default {
+        components: {
+            'vue-core-image-upload': VueCoreImageUpload,
+        },
+        data() {
+            return {
+                src: '/img/123.jpg'  //默认的图片路径
+            }
+        },
+        methods: {  
+
+          imageuploaded(res) {     //图片上传成功后调用此方法，res为返回值为服务器存放图片的路径，再将图片路径赋值给src
+            console.log("文件上传成功！");
+            this.src=res;
+    
+          },
+         handleError(){           //图片上失败后调用此方法
+              console.log("文件上传失败！");
+          
+               this.$notify.error({
+                         title: '上传失败',
+                         message: '图片上传接口上传失败，可更改为自己的服务器接口'
+                   });
+         }
+
+
+        }
+    };
+</script>        

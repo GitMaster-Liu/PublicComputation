@@ -1,0 +1,119 @@
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>用户下载
+
+                </div>
+                <div class="card-body">
+                    <div class=" form-horizontal">
+
+                        <div>
+                        <button type="reset" class="layui-btn" onclick="ftpFunction()">点击查看运算结果</button>
+                        
+                        </div>
+                        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                            <legend>编译记录</legend>
+                        </fieldset>
+                        <div>
+  <table class="layui-table">
+                          <thead>
+      <tr>
+      	<th>创建时间</th>
+        <th>用户名</th>
+        <th>工程名</th>
+        <th>工程类型</th>
+        <th>是否完成</th>
+      </tr> 
+    </thead>
+               <tbody>
+      <tr>
+      	<td>2018-12-03 23:57:42</td>
+        <td>liuyangyi</td>
+        <td>Test1013</td>
+        <td>matlab</td>
+        <td>是</td>
+      </tr>
+      <tr>
+      	<td>2018-11-30 18:22:21</td>
+        <td>liuyangyi</td>
+        <td>Test1013</td>
+        <td>matlab</td>
+        <td>是</td>
+      </tr>
+      <tr>
+      	<td>2018-11-30 08:14:04</td>
+        <td>liuyangyi</td>
+        <td>Test1013</td>
+        <td>matlab</td>
+        <td>是</td>
+      </tr>
+      <tr>
+      	<td>2018-11-22 13:43:33</td>
+        <td>liuyangyi</td>
+        <td>Test1013</td>
+        <td>matlab</td>
+        <td>是</td>
+      </tr>
+      <tr>
+      	<td>2018-11-19 09:33:52</td>
+        <td>admin</td>
+        <td>Test1005</td>
+        <td>python</td>
+        <td>是</td>
+      </tr>
+      <tr>
+      	<td>2018-11-15 10:51:09</td>
+        <td>admin</td>
+        <td>Test1005</td>
+        <td>python</td>
+        <td>是</td>
+      </tr>
+            <tr>
+      	<td>2018-11-12 12:29:15</td>
+        <td>admin</td>
+        <td>Test1005</td>
+        <td>python</td>
+        <td>是</td>
+      </tr>
+            <tr>
+      	<td>2018-11-05 17:54:30</td>
+        <td>admin</td>
+        <td>Test1005</td>
+        <td>python</td>
+        <td>是</td>
+      </tr>
+      <tr>
+      	<td>2018-11-04 19:10:34</td>
+        <td>admin</td>
+        <td>Test1005</td>
+        <td>python</td>
+        <td>是</td>
+      </tr>
+            <tr>
+      	<td>2018-10-30 19:47:10</td>
+        <td>admin</td>
+        <td>Test1005</td>
+        <td>python</td>
+        <td>是</td>
+      </tr>
+    </tbody>         
+               </table>     
+                    
+        
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </div>
+</div>
+<script>
+function ftpFunction(){
+	window.alert("用户名：cims\n密码：nihao\n点击确定下载运算结果")
+	window.open("ftp://192.168.7.17/Results/")
+}
+</script>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="shortcut icon" href="img/dlut.png"/>
+    <title>CIMS-公共平台</title>
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/lib/simple-line-icons/css/simple-line-icons.css"></link>
+    <!--layui and necessary plugins-->
+    <link rel="stylesheet" type="text/css" href="/lib/layui/css/layui.css"  media="all"></link>
+    <!-- Main styles for this application -->
+    <link rel="stylesheet" type="text/css" href="/css/style.min.css"></link>
+</head>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+
+<header class="app-header navbar" >
+
+	<img src="/img/cims-logo.png" width="148"/>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown" >
+            <a class="dropdown-item" href="/logout" target="_top"><i class="fa fa-lock"></i> 系统退出</a>
+        </li>
+    </ul>
+
+</header>
+
+<div class="app-body">
+	
+	<!-- 侧边栏开始 -->
+	 <div class="sidebar">
+		<!--<div >		
+			<ul class="nav">
+				<li class="nav-item" th:inline="text" >
+                    <a class="nav-link" >用户：[[${user.name}]] </a>
+                </li>
+                <li class="av-item" th:inline="text">
+                    <a class="nav-link" >学校：[[${user.school}]]</a>
+                </li>
+                <li class="av-item" th:inline="text">
+                    <a class="nav-link" >学院：[[${user.institute}]]</a>
+                </li>
+			</ul>
+		</div>
+		 -->
+        <!--子系统模块菜单  开始 OK-->
+        <nav class="sidebar-nav">
+            <ul class="nav">
+            	<li class = "nav-item" id="click1">
+				<a class="nav-link" style="font-size:16px;"><i class="icon-speedometer"></i>大数据平台</a>
+				</li>
+				<div id="display1" style="display:none;">
+				<li class ="nav-item">
+                	<a class="nav-link" href="http://192.168.7.11:7180/" target="_blank" ><i class="icon-speedometer"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基础环境</a>
+                </li>
+                <li class ="nav-item">
+                	<a class="nav-link" href="#" th:href="${'/system/update'}" ><i class="icon-speedometer"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据采集</a>
+                </li>
+                <li class ="nav-item">
+                	<a class="nav-link" href="#" th:href="${'/system/update1'}" ><i class="icon-speedometer"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云存储</a>
+                </li>
+                
+                </div>
+                
+                <li class = "nav-item" id="click2">
+				<a class="nav-link" style="font-size:16px;"><i class="icon-wrench"></i>3D平台</a>
+				</li>
+				<div id="display2" style="display:none;">
+                <li class ="nav-item">
+                	<a class="nav-link" href="http://192.168.7.17/" target="_blank" ><i class="icon-wrench"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后台管理</a>
+                </li>
+                <li class ="nav-item">
+                	<a class="nav-link" href="GoUNITY://启动Unity" target="_top" ><i class="icon-wrench"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;应用实例</a>
+                </li>
+                </div>
+                
+				<li class = "nav-item" id="click">
+				<a class="nav-link" style="font-size:16px;"><i class="icon-puzzle"></i>公共计算</a>
+				</li>
+				<div id="display" style="display:none;">
+                <li class ="nav-item">
+                	<a class="nav-link" href="#" th:href="${'/system/function'}"><i class="icon-puzzle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统功能</a>
+                </li>
+                <li class ="nav-item">
+                	<a class="nav-link" href="#" th:href="${'/code/compile'}"><i class="icon-puzzle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代码编译</a>
+                </li>
+                 <li class ="nav-item">
+                	<a class="nav-link" href="#" th:href="${'/code/ftpdownload'}"><i class="icon-puzzle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户下载</a>
+                </li>
+                 <li class ="nav-item">
+                	<a class="nav-link" href="#" th:href="${'/system/autodeploy'}"><i class="icon-puzzle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自动部署</a>
+                </li>
+                </div>
+                
+
+                
+                <li class = "nav-item" id="click3">
+				<a class="nav-link" style="font-size:16px;"><i class="icon-clock"></i>项目展示</a>
+				</li>
+				<div id="display3" style="display:none;">
+				<li class ="nav-item">
+                	<a class="nav-link" href="Go://启动调度" target="_top"><i class="icon-clock"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预测与调度</a>
+                </li>
+                <li class ="nav-item">
+                	<a class="nav-link" href="GoWINCC://启动WINcc" target="_top"><i class="icon-clock"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCADA</a>
+                </li>
+                <li class ="nav-item">
+                	<a class="nav-link" href="http://www.shbaoneng.com:8092/" target="_blank"><i class="icon-clock"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云平台</a>
+                </li>
+                
+                </div>
+                
+                
+                
+
+                           <!--icon-wrench  icon-speedometer  icon-puzzle  icon-calculator  icon-clock-->        
+
+                  
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="${'/lessonMember/lessonmember'}"><i class="icon-speedometer"></i> 学  生 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="${'/lessonMember/test'}"><i class="icon-speedometer"></i> test</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="${'/knowledge/lessonknowledge'}"><i class="icon-speedometer"></i> 知识点 </a>
+                </li>
+
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="${'/sys/download'}"><i class="icon-speedometer"></i> 测试 </a>
+                </li> -->
+            </ul>
+        </nav>
+        <!--子系统模块菜单  结束-->
+        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+	<!-- 侧边栏结束 -->
+
+    <!-- Main content -->
+    <main class="main">
+        <div class="container-fluid">
+            <div id="ui-view"></div>
+        </div>
+	</main>
+    <!--系统提示 开始-->
+    <aside class="aside-menu">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="icon-list"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="icon-speech"></i></a>
+            </li>
+        </ul>
+
+    </aside>
+    <!--系统提示 结束-->
+</div>
+
+
+
+<!-- Bootstrap and necessary plugins -->
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/popper.js/popper.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lib/pace-progress/pace.min.js"></script>
+<script type="text/javascript" src="/lib/layer/layer.js"></script>
+<script type="text/javascript" src="/lib/layui/layui.js"></script>
+<script type="text/javascript" src="/lib/vue.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    /* $.indexPage='sys/index';//取值 */
+    $.indexPage='/system/welcome';
+    /*]]>*/
+</script>
+<script type="text/javascript">
+		document.getElementById("click").onclick=function(){
+			if(document.getElementById("display").style.display=="none"){
+		document.getElementById("display").style.display="block";}
+			else
+				{document.getElementById("display").style.display="none";}
+			}
+		document.getElementById("click1").onclick=function(){
+			if(document.getElementById("display1").style.display=="none"){
+		document.getElementById("display1").style.display="block";}
+			else
+				{document.getElementById("display1").style.display="none";}
+			}
+		document.getElementById("click2").onclick=function(){
+			if(document.getElementById("display2").style.display=="none"){
+		document.getElementById("display2").style.display="block";}
+			else
+				{document.getElementById("display2").style.display="none";}
+			}
+		document.getElementById("click3").onclick=function(){
+			if(document.getElementById("display3").style.display=="none"){
+		document.getElementById("display3").style.display="block";}
+			else
+				{document.getElementById("display3").style.display="none";}
+			}
+</script>
+
+
+<!-- CoreUI main scripts -->
+<script src="js/app.js" th:inline="javascript"></script>
+<script src="js/util/ajaxutils.js" th:inline="javascript"></script>
+
+</body>
+</html>

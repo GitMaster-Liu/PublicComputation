@@ -1,0 +1,71 @@
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>自动部署
+                </div>
+                <div class="card-body">
+                    <div class=" form-horizontal">
+                        <div class="row" >
+                            <a class="opreate-btn layui-btn layui-btn-sm"  href="#" th:href="${'/system/addhost'}" data-type="add" id="addbtn" style="margin-left: 18px;" ><i class="icon-plus"></i>新增</a>
+                            <a class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  href="#" data-type="delete" id="deletebtn"><i class="icon-close"></i>删除</a>
+                        </div>
+                        <div>
+                         <table class="layui-table">
+                          <thead>
+      <tr>
+      <th></th>
+        <th>主机名称</th>
+        <th>IP地址</th>
+        <th>Slave1</th>
+        <th>Slave2</th>
+        <th>Slave3</th>
+        <th>备注</th>
+      </tr> 
+    </thead>
+
+               <tbody>
+      <tr id="row1">
+      <td><input type="checkbox" id="select1" /></td>
+        <td>Host1</td>
+        <td>192.168.7.6</td>
+        <td>python</td>
+        <td>*</td>
+        <td>*</td>
+        <td>Middleware所在主机</td>
+      </tr>
+
+
+
+
+      <tr id="row2">
+      <td><input type="checkbox" id="select2" /></td>
+        <td>Host2</td>
+        <td>192.168.7.17</td>
+        <td>python</td>
+        <td>matlab</td>
+        <td>*</td>
+        <td>FTP服务器所在主机</td>
+      </tr>
+
+    </tbody>     
+ 
+               </table> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+document.getElementById("deletebtn").onclick=function(){
+		if(select1.checked == true){document.getElementById("row1").style.display="none";
+		if(select2.checked == true){document.getElementById("row2").style.display="none";}}
+		else if(select2.checked == true){document.getElementById("row2").style.display="none";}
+		else
+		{window.alert("请选择需要删除的主机");}
+	}
+</script>
